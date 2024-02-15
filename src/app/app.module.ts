@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './common/nav-bar/nav-bar.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient ,HttpClient } from '@angular/common/http';
 
 
 
@@ -18,6 +18,8 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    
    
   ],
   providers: [

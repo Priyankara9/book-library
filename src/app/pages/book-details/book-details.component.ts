@@ -10,6 +10,16 @@ import { error } from 'console';
   styleUrl: './book-details.component.css'
 })
 export class BookDetailsComponent implements OnInit{
+  bookToDelete :number |null=null;
+  isdeleted : boolean=false;
+setBookTodelete(id: number):void {
+    this.bookToDelete=id;
+    
+}
+clearBookTodelete():void {
+  this.bookToDelete=null;
+ this.isdeleted=false;
+}
   
     data: any[] = [];
      
@@ -26,7 +36,21 @@ export class BookDetailsComponent implements OnInit{
       )
       
     }
+    deleteBook(id:number):void {
+      console.log("delete function called");
+      this.http.delete(`http://localhost:8080/book/delete/${id}`).subscribe(
+        (response)=>{
+          this.fetchDataFromServer(); 
+          this.clearBookTodelete(); 
+          this.isdeleted=true;
+        },
+        (error)=>{
+          console.error('Error fetching data:', error);
+        }
+      )
+    }
     ngOnInit(): void {
       this.fetchDataFromServer();  
+      
      }
 }
