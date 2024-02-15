@@ -26,7 +26,7 @@
               class="btn btn-danger"
               data-bs-toggle="modal"
               data-bs-target="#delete"
-              (click)="setBookTodelete(book.id)"
+              (click)="setBookTodelete(book.id); isdeleted = false"
             >
               <i class="bi bi-trash3-fill"></i>
             </button>
@@ -36,6 +36,7 @@
               data-bs-toggle="modal"
               data-bs-target="#update"
               data-bs-whatever="@getbootstrap"
+              (click)="setBookId(book.id); isupdated = false"
             >
               <i class="bi bi-pencil-square"></i>
             </button>
@@ -97,6 +98,7 @@
     </div>
   </div>
 </div>
+<!-- Modal -->
 
 <div
   class="modal fade"
@@ -116,47 +118,88 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="dropdown">
-            <label for="isBn" class="col-form-label">IsBn:</label>
-            <select name="isBn" id="isBn" class="form-select">
-              <option value="" disabled selected>Please select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="book-title" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="book-title" />
-          </div>
-          <div class="mb-3">
-            <label for="author" class="col-form-label">Author:</label>
-            <input type="text" class="form-control" id="author" />
-          </div>
-          <div class="mb-3">
-            <label for="category" class="col-form-label">Category:</label>
-            <select name="category" id="category" class="form-select">
-              <option value="" disabled selected>Please select</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
-              <option value="F">F</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="qty" class="col-form-label">Qty:</label>
-            <input type="number" class="form-control" id="qty" />
-          </div>
-        </form>
+      <div class="modal-body" [ngClass]="{ 'success-message': isupdated }">
+        <ng-container *ngIf="isupdated">
+          <!-- Show if delete is successful -->
+          Book successfully updated!
+        </ng-container>
+        <ng-container *ngIf="!isupdated">
+          <form>
+            <div class="dropdown">
+              <label for="isbn" class="col-form-label">Isbn:</label>
+              <select
+                name="isbn"
+                id="isbn"
+                class="form-select"
+                [(ngModel)]="bookToUpdate.isbn"
+              >
+                <option value="" disabled selected>Please select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="book-title" class="col-form-label">Title:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="book-title"
+                [(ngModel)]="bookToUpdate.title"
+                name="title"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="author" class="col-form-label">Author:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="author"
+                [(ngModel)]="bookToUpdate.author"
+                name="author"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="category" class="col-form-label">Category:</label>
+              <select
+                name="category"
+                id="category"
+                class="form-select"
+                [(ngModel)]="bookToUpdate.category"
+              >
+                <option value="" disabled selected>Please select</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="qty" class="col-form-label">Qty:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="qty"
+                [(ngModel)]="bookToUpdate.qty"
+                name="qty"
+              />
+            </div>
+          </form>
+        </ng-container>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Save Changes</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="bookToUpdate.id !== 0 ? updateBook(bookToUpdate) : null"
+          *ngIf="!isupdated"
+        >
+          Save Changes
+        </button>
       </div>
     </div>
   </div>
