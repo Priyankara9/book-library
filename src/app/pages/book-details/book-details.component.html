@@ -36,7 +36,7 @@
               data-bs-toggle="modal"
               data-bs-target="#update"
               data-bs-whatever="@getbootstrap"
-              (click)="setBookId(book.id); isupdated = false"
+              (click)="setBookToUpdate(book); isupdated = false"
             >
               <i class="bi bi-pencil-square"></i>
             </button>
@@ -120,11 +120,21 @@
       </div>
       <div class="modal-body" [ngClass]="{ 'success-message': isupdated }">
         <ng-container *ngIf="isupdated">
-          <!-- Show if delete is successful -->
           Book successfully updated!
         </ng-container>
         <ng-container *ngIf="!isupdated">
           <form>
+            <div class="mb-3">
+              <label for="author" class="col-form-label">ID:</label>
+              <input
+                type="text"
+                disabled=""
+                class="form-control"
+                id="id"
+                [(ngModel)]="bookToUpdate.id"
+                name="id"
+              />
+            </div>
             <div class="dropdown">
               <label for="isbn" class="col-form-label">Isbn:</label>
               <select

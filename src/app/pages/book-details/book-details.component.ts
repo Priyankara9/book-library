@@ -19,15 +19,20 @@ interface Book{
 
 export class BookDetailsComponent implements OnInit{
 
-  data: Book[] = [];
+data: Book[] = [];
 isupdated: boolean=false;
-  constructor(private http:HttpClient){}
+constructor(private http:HttpClient){}
 
-  bookToDelete :number |null=null;
-  isdeleted : boolean=false;
-  bookToUpdate: Book = {} as Book;
-setBookId(id: number) {
-    this.bookToUpdate.id=id;
+bookToDelete :number |null=null;
+isdeleted : boolean=false;
+bookToUpdate: Book = {} as Book;
+setBookToUpdate(book:Book):void {
+    this.bookToUpdate.id=book.id;
+    this.bookToUpdate.isbn=book.isbn;
+    this.bookToUpdate.title=book.title;
+    this.bookToUpdate.author=book.author;
+    this.bookToUpdate.category=book.category;
+    this.bookToUpdate.qty=book.qty;
 }
 setBookTodelete(id: number):void {
     this.bookToDelete=id;

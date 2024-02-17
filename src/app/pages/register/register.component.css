@@ -1,0 +1,15 @@
+.bg-color{
+    background-color: rgb(127, 176, 233);
+    opacity: 0.7;
+}
+h2{
+    color: blue;
+}
+label{
+    color: rgb(0, 0, 7);
+}
+.sign-in{
+    width: 100px!important;
+    height: 100px!important;
+    color: blue;   
+}

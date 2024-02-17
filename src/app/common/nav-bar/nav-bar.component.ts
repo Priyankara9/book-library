@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
+  activeLink:string="";
+  setActiveLink(link:string):void{
+    this.activeLink=link;
+  }
  
 
 }
